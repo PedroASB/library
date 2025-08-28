@@ -1,0 +1,67 @@
+:root {
+    --system-ui: system-ui, 
+                 "Segoe UI", 
+                 Roboto, 
+                 Helvetica, 
+                 Arial, 
+                 sans-serif, 
+                 "Apple Color Emoji", 
+                 "Segoe UI Emoji", 
+                 "Segoe UI Symbol",
+                 "Noto Color Emoji";
+    --primary-color: #6097df;
+    --font-color: #131313;
+    --lighter-font-color: #3b3b3b;
+    --main-bg-color: #fff;
+    --sidebar-bg-color: #f0f0f0;
+}
+
+body {
+    font-family: var(--system-ui);
+    color: var(--font-color);
+}
+
+body > .container {
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: 150px 1fr;
+    grid-template-areas:
+        "sidebar header"
+        "sidebar main-content";
+}
+
+#header {
+    grid-area: header;
+    background-color: var(--main-bg-color);
+    border-bottom: 2px solid #cacaca;
+    padding: 32px;
+}
+
+#sidebar {
+    grid-area: sidebar;
+    background-color: var(--sidebar-bg-color);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    .branding {
+        font-weight: 900;
+        font-size: 1.25rem;
+    }
+    
+    .navigation {
+        font-weight: 500;
+        font-size: 1.10rem;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+#main-content {
+    grid-area: main-content;
+    background-color: var(--main-bg-color);
+    padding: 32px;
+}
