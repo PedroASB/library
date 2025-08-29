@@ -30,9 +30,37 @@
         </div>
 
         <div id="main-content">
-            <div class="books">
-                
-            </div>
+            <template id="card-template">
+                <div class="card">
+                    <div class="picture">
+                        <img src="./assets/icons/book-icon.svg" alt="Book Icon">
+                    </div>
+                    <div class="info">
+                        <div class="top">
+                            <div class="title"></div>
+                            <div class="author">By <span></span></div>
+                        </div>
+                        <div class="middle">
+                            <div class="pages">
+                                <div class="value"></div>
+                                <div class="label">Pages</div>
+                            </div>
+                            <div class="genre">
+                                <div class="value"></div>
+                                <div class="label">Genre</div>
+                            </div>
+                            <div class="release">
+                                <div class="value"></div>
+                                <div class="label">Release</div>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <button class="read">Read</button>
+                            <button class="remove">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </template>
         </div>
     </div>
 </body>
