@@ -17,7 +17,7 @@ function Book(title, author, pages, read, genre, release) {
 
 // Adds a new book to the library
 function addBookToLibrary(title, author, pages, read, genre, release) {
-    let newBook = new Book(title, author, pages, read, genre, release);
+    const newBook = new Book(title, author, pages, read, genre, release);
     library.push(newBook);
 }
 
@@ -31,19 +31,35 @@ function displayBook(book) {
     card.querySelector(".pages .value").textContent = book.pages;
     card.querySelector(".genre .value").textContent = book.genre;
     card.querySelector(".release .value").textContent = book.release;
-    
+
     mainContent.appendChild(card);
 }
 
 function addSampleBooks() {
-    let book1 = new Book("Nice Book", "AuTornado", 123, false, "Sci-Fi", 1980);
-    let book2 = new Book("Another Nice Book", "AuThor", 456, false, "Wi-Fi", 1985);
-    let book3 = new Book("A Nicer Book", "AuThor Ragnarok", 1089, false, "Action", 1990);
-    let book4 = new Book("The Nicest One", "Alt Thor", 684, false, "Random", 1995);
+    const book1 = new Book("Nice Book", "AuTornado", 123, false, "Sci-Fi", 1980);
+    const book2 = new Book("Another Nice Book", "AuThor", 456, false, "Wi-Fi", 1985);
+    const book3 = new Book("A Nicer Book", "AuThor Ragnarok", 1089, false, "Action", 1990);
+    const book4 = new Book("The Nicest One", "Alt Thor", 684, false, "Random", 1995);
+
     displayBook(book1);
     displayBook(book2);
     displayBook(book3);
     displayBook(book4);
 }
 
-addSampleBooks();
+function enterNewBook() {
+    const dialog = document.querySelector("#new-book-dialog");
+    dialog.showModal();
+}
+
+function initializeLibrary() {
+    const newBookButton = document.querySelector("#new-book-btn");
+    newBookButton.addEventListener("click", enterNewBook);
+
+    // Adding some sample books
+    addSampleBooks();
+}
+
+// Begin
+initializeLibrary();
+enterNewBook();

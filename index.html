@@ -19,8 +19,8 @@
                 <img src="./assets/imgs/profile-image.jpg" alt="Profile Image">
                 <div class="name">Alice Smith</div>
             </div>
-            <button class="new-book" type="button">New Book</button>
-            <button class="filters" type="button"><img src="./assets/icons/filter-list-icon.svg" alt="Filter List Icon" class="icon"> Filters</button>
+            <button id="new-book-btn" type="button">New Book</button>
+            <button id="filters-btn" type="button"><img src="./assets/icons/filter-list-icon.svg" alt="Filter List Icon" class="icon"> Filters</button>
         </div>
 
         <div id="sidebar">
@@ -72,6 +72,66 @@
                 </div>
             </template>
         </div>
+
+        <dialog id="new-book-dialog">
+            <form method="dialog">
+                <fieldset>
+                    <legend>New book</legend>
+
+                    <label for="title">
+                        <div>Title <span aria-label="required">*</span></div>
+                        <input type="text" id="book-title" name="title" maxlength="35" required>
+                    </label>
+
+                    <label for="author">
+                        <div>Author <span aria-label="required">*</span></div>
+                        <input type="text" id="book-author" name="author" maxlength="35" required>
+                    </label>
+
+                    <label for="genre">
+                        <div>Genre <span aria-label="required">*</span></div>
+                        <select name="genre" id="book-genre">
+                            <option value="" selected>—— Select ——</option>
+                            <option value="fiction">Fiction</option>
+                            <option value="non-fiction">Non-Fiction</option>
+                            <option value="sci-fi">Sci-Fi</option>
+                            <option value="fantasy">Fantasy</option>
+                            <option value="romance">Romance</option>
+                            <option value="historical">Historical</option>
+                            <option value="mistery-thriller">Mistery/Thriller</option>
+                            <option value="horror">Horror</option>
+                            <option value="biography">Biography</option>
+                            <option value="self-help">Self-Help</option>
+                            <option value="personal-development">Personal Development</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </label>
+
+                    <div id="pages-release-box">
+                        <label for="pages">
+                            <div>Pages</div>
+                            <input type="number" id="book-pages" name="pages" min="1" max="99999">
+                        </label>
+    
+                        <label for="release">
+                            <div>Release year</div>
+                            <input type="number" id="book-release" name="release" min="1" max="2025">
+                        </label>
+                    </div>
+
+                    <label class="checkbox" for="book-read">
+                        <input type="checkbox" name="read" value="read" id="book-read">
+                        <span>Read</span>
+                    </label>
+                </fieldset>
+
+                <div class="buttons">
+                    <button value="ok-button">Add book</button>
+                    <button value="cancel-button" formnovalidate>Cancel</button>
+                </div>
+            </form>
+        </dialog>
     </div>
+    
 </body>
 </html>
