@@ -47,19 +47,61 @@ function addSampleBooks() {
     displayBook(book4);
 }
 
-function enterNewBook() {
-    const dialog = document.querySelector("#new-book-dialog");
-    dialog.showModal();
+function handleFormData() {
+    const form = document.querySelector("#new-book-form");
+    const formData = new FormData(form);
+    let title, author, pages, read = false, genre, release;
+
+    for (const [key, value] of formData) {
+        switch (key) {
+            case "title":
+                title = value ? value : EMPTY_FIELD;
+                break;
+            case "author":
+                author = value ? value : EMPTY_FIELD;
+                break;
+            case "pages":
+                pages = value ? value : EMPTY_FIELD;
+                break;
+            case "genre":
+                genre = value ? value : EMPTY_FIELD;
+                break;
+            case "release":
+                release = value ? value : EMPTY_FIELD;
+                break;
+            case "read":
+                read = true;
+                break;
+        }
+    }
+
+    form.reset();
+    const newBook = new Book(title, author, pages, read, genre, release);
+    return newBook;
 }
 
 function initializeLibrary() {
     const newBookButton = document.querySelector("#new-book-btn");
-    newBookButton.addEventListener("click", enterNewBook);
+    const dialog = document.querySelector("#new-book-dialog");
+
+    newBookButton.addEventListener("click", () => {
+        dialog.showModal();
+    });
+
+    dialog.addEventListener("close", () => {
+        if (dialog.returnValue === "ok-button") {
+            const newBook = handleFormData();
+            displayBook(newBook);
+        }
+    });
 
     // Adding some sample books
     addSampleBooks();
 }
 
+
+// Global constants and variables
+const EMPTY_FIELD = "\u2013";
+
 // Begin
 initializeLibrary();
-enterNewBook();
