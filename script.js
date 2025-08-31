@@ -18,18 +18,34 @@ function addBookToLibrary(title, author, pages, read, genre, release) {
     library.push(newBook);
 }
 
+// Removes a book from the library array
+function removeBookFromLibrary(id) {
+    library.splice(0, library.length, library.filter((book) => {book.id !== id}));
+}
+
+// Handles the removal of a book and removes it from the DOM
+function handleRemoveBook(event) {
+    const card = event.target.closest(".card");
+    const bookId = card.dataset.id;
+    removeBookFromLibrary(bookId);
+    card.remove();
+}
+
 // Displays a single book on the page
 function displayBook(book) {
     const mainContent = document.querySelector("#main-content");
     const cardTemplate = document.querySelector("#card-template");
     const card = cardTemplate.content.cloneNode(true);
-
+    const removeButton = card.querySelector("button.remove");
+    
+    card.querySelector(".card").setAttribute("data-id", book.id);
     card.querySelector(".title").textContent = book.title;
     card.querySelector(".author span").textContent = book.author;
     card.querySelector(".pages .value").textContent = book.pages;
     card.querySelector(".genre .value").textContent = book.genre;
     card.querySelector(".release .value").textContent = book.release;
-
+    
+    removeButton.addEventListener("click", handleRemoveBook);
     mainContent.appendChild(card);
 }
 
@@ -95,7 +111,6 @@ function initializeLibrary() {
             handleFormData();
             displayBook(library[library.length - 1]);
         }
-        console.log(library);
     });
 
     // Adding some sample books to the page
