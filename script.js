@@ -1,6 +1,3 @@
-// Array that stores the books
-const library = [];
-
 // Book constructor
 function Book(title, author, pages, read, genre, release) {
     if (!new.target) {
@@ -15,12 +12,13 @@ function Book(title, author, pages, read, genre, release) {
     this.id = crypto.randomUUID();
 }
 
-// Adds a new book to the library
+// Adds a new book to the library array
 function addBookToLibrary(title, author, pages, read, genre, release) {
     const newBook = new Book(title, author, pages, read, genre, release);
     library.push(newBook);
 }
 
+// Displays a single book on the page
 function displayBook(book) {
     const mainContent = document.querySelector("#main-content");
     const cardTemplate = document.querySelector("#card-template");
@@ -35,18 +33,22 @@ function displayBook(book) {
     mainContent.appendChild(card);
 }
 
-function addSampleBooks() {
-    const book1 = new Book("Nice Book", "AuTornado", 123, false, "Sci-Fi", 1980);
-    const book2 = new Book("Another Nice Book", "AuThor", 456, false, "Wi-Fi", 1985);
-    const book3 = new Book("A Nicer Book", "AuThor Ragnarok", 1089, false, "Action", 1990);
-    const book4 = new Book("The Nicest One", "Alt Thor", 684, false, "Random", 1995);
-
-    displayBook(book1);
-    displayBook(book2);
-    displayBook(book3);
-    displayBook(book4);
+// Displays all books in the library array on the page
+function displayAllBooks() {
+    for (const book of library) {
+        displayBook(book);
+    }
 }
 
+// Adds some random books to the library
+function addSampleBooks() {
+    addBookToLibrary("Nice Book", "AuTornado", 123, false, "Sci-Fi", 1980);
+    addBookToLibrary("Another Nice Book", "AuThor", 456, false, "Wi-Fi", 1985);
+    addBookToLibrary("A Nicer Book", "AuThor Ragnarok", 1089, false, "Action", 1990);
+    addBookToLibrary("The Nicest One", "Alt Thor", 684, false, "Random", 1995);
+}
+
+// Extracts the data from the form and adds the book to the library array
 function handleFormData() {
     const form = document.querySelector("#new-book-form");
     const formData = new FormData(form);
@@ -76,10 +78,10 @@ function handleFormData() {
     }
 
     form.reset();
-    const newBook = new Book(title, author, pages, read, genre, release);
-    return newBook;
+    addBookToLibrary(title, author, pages, read, genre, release);
 }
 
+// Sets up the library app
 function initializeLibrary() {
     const newBookButton = document.querySelector("#new-book-btn");
     const dialog = document.querySelector("#new-book-dialog");
@@ -90,18 +92,21 @@ function initializeLibrary() {
 
     dialog.addEventListener("close", () => {
         if (dialog.returnValue === "ok-button") {
-            const newBook = handleFormData();
-            displayBook(newBook);
+            handleFormData();
+            displayBook(library[library.length - 1]);
         }
+        console.log(library);
     });
 
-    // Adding some sample books
+    // Adding some sample books to the page
     addSampleBooks();
+    displayAllBooks();
 }
 
 
-// Global constants and variables
+/* Global constants and variables */
 const EMPTY_FIELD = "\u2013";
+const library = []; // Array that stores the books
 
-// Begin
+/* Begin */
 initializeLibrary();
