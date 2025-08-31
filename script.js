@@ -12,6 +12,11 @@ function Book(title, author, pages, read, genre, release) {
     this.id = crypto.randomUUID();
 }
 
+// Toggle the read status of a book object between true/false
+Book.prototype.toggleReadStatus = function() {
+    this.read = !this.read;
+}
+
 // Adds a new book to the library array
 function addBookToLibrary(title, author, pages, read, genre, release) {
     const newBook = new Book(title, author, pages, read, genre, release);
@@ -31,12 +36,42 @@ function handleRemoveBook(event) {
     card.remove();
 }
 
+function getBookFromId(id) {
+    for (const book of library) {
+        if (book.id === id) return book;
+    }
+    return null;
+}
+
+function handleReadBook(event) {
+    const card = event.target.closest(".card");
+    const bookId = card.dataset.id;
+    const book = getBookFromId(bookId);
+    const unreadBooksDiv = document.querySelector("#main-content .unread-books");
+    const readBooksDiv = document.querySelector("#main-content .read-books");
+
+    card.remove();
+
+    if (book.read) { // Read to Unread
+        unreadBooksDiv.appendChild(card);
+        card.querySelector("button.read").textContent = "Mark as read";
+    }
+    else { // Unread to Read
+        readBooksDiv.appendChild(card); 
+        card.querySelector("button.read").textContent = "Mark as unread";
+    }
+
+    book.toggleReadStatus();
+}
+
 // Displays a single book on the page
 function displayBook(book) {
-    const mainContent = document.querySelector("#main-content");
+    const unreadBooksDiv = document.querySelector("#main-content .unread-books");
+    const readBooksDiv = document.querySelector("#main-content .read-books");
     const cardTemplate = document.querySelector("#card-template");
     const card = cardTemplate.content.cloneNode(true);
     const removeButton = card.querySelector("button.remove");
+    const readButton = card.querySelector("button.read");
     
     card.querySelector(".card").setAttribute("data-id", book.id);
     card.querySelector(".title").textContent = book.title;
@@ -46,10 +81,19 @@ function displayBook(book) {
     card.querySelector(".release .value").textContent = book.release;
     
     removeButton.addEventListener("click", handleRemoveBook);
-    mainContent.appendChild(card);
+    readButton.addEventListener("click", handleReadBook);
+
+    if (book.read) {
+        readBooksDiv.appendChild(card);
+        readButton.textContent = "Mark as unread";
+    }
+    else {
+        unreadBooksDiv.appendChild(card);
+        readButton.textContent = "Mark as read";
+    }
 }
 
-// Displays all books in the library array on the page
+// Loops through the library array and displays each book on the page
 function displayAllBooks() {
     for (const book of library) {
         displayBook(book);
