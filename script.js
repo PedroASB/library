@@ -25,7 +25,7 @@ function addBookToLibrary(title, author, pages, read, genre, release) {
 
 // Removes a book from the library array
 function removeBookFromLibrary(id) {
-    library.splice(0, library.length, library.filter((book) => {book.id !== id}));
+    library.splice(0, library.length, ...library.filter((book) => book.id !== id));
 }
 
 // Handles the removal of a book and removes it from the DOM
@@ -36,6 +36,7 @@ function handleRemoveBook(event) {
     card.remove();
 }
 
+// Returns a book given its id
 function getBookFromId(id) {
     for (const book of library) {
         if (book.id === id) return book;
@@ -43,6 +44,7 @@ function getBookFromId(id) {
     return null;
 }
 
+// Handles the toggle of the read status of a book
 function handleReadBook(event) {
     const card = event.target.closest(".card");
     const bookId = card.dataset.id;
