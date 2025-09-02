@@ -9,7 +9,7 @@ function Book(title, author, pages, read, genre, release, cover) {
     this.read = read;
     this.genre = genre;
     this.release = release;
-    this.cover = cover; // Path to the cover image
+    this.cover = cover;
     this.id = crypto.randomUUID();
 }
 
@@ -32,6 +32,12 @@ function removeBookFromLibrary(id) {
 // Handles the removal of a book and removes it from the DOM
 function handleRemoveBook(event) {
     const card = event.target.closest(".card");
+    const bookTitle = card.querySelector(".title").textContent;
+
+    if (!confirm(`Are you sure you want to delete the book\n"${bookTitle}"?`)) {
+        return;
+    }
+
     const bookId = card.dataset.id;
     removeBookFromLibrary(bookId);
     card.remove();
@@ -83,8 +89,9 @@ function displayBook(book) {
     card.querySelector(".genre .value").textContent = book.genre;
     card.querySelector(".release .value").textContent = book.release;
     if (book.cover) {
+        card.querySelector(".picture img").src = book.cover; // Using local path './assets/imgs'
+        card.querySelector(".picture img").style.border = "2px solid rgba(201, 201, 201, 0.5)";
         card.querySelector(".picture").style.backgroundColor = "inherit";
-        card.querySelector(".picture img").src = book.cover;
     }
     
     removeButton.addEventListener("click", handleRemoveBook);
@@ -129,7 +136,7 @@ function addSampleBooks() {
 function handleFormData() {
     const form = document.querySelector("#new-book-form");
     const formData = new FormData(form);
-    let title, author, pages, read = false, genre, release;
+    let title, author, pages, read = false, genre, release, cover;
 
     for (const [key, value] of formData) {
         switch (key) {
@@ -150,6 +157,20 @@ function handleFormData() {
                 break;
             case "read":
                 read = true;
+                break;
+            case "cover":
+                /** 
+                 * @NOTE 
+                 * The file input element for book cover is 
+                 * decorative and does not actually upload files.
+                 * 
+                 * This is because, for security reasons, browsers do not allow 
+                 * access to the full local file path from an <input type="file">.
+                 * 
+                 * The element is included only to simulate how a file selector 
+                 * would appear in a real application with a backend server.
+                 */
+                cover = null;
                 break;
         }
     }

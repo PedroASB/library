@@ -167,7 +167,8 @@ body > .container {
     border-radius: 16px;
     border: 2px solid #c9c9c9;
     height: 180px;
-    width: fit-content;
+    width: 400px;
+    text-wrap: nowrap;
 
     .picture {
         min-width: 110px;
@@ -180,7 +181,6 @@ body > .container {
         img {
             height: 150px;
             width: 100px;
-            border: 2px solid rgba(201, 201, 201, 0.5);
         }
     }
 
@@ -194,14 +194,20 @@ body > .container {
         .top {
             display: flex;
             flex-direction: column;
+            max-width: 250px;
 
             .title {
                 font-weight: 600;
                 font-size: 1.0rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                
             }
 
             .author {
                 font-size: 0.95rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
 
@@ -232,22 +238,29 @@ body > .container {
 
             button {
                 background-color: inherit;
-                border: 2px solid rgb(201, 201, 201);
                 border-radius: 4px;
                 font-size: 0.9rem;
-
+                
                 &.read {
                     width: 16ch;
+                    border: 2px solid #c9c9c9;
+                    color: #3d3d3d;
                 }
 
                 &.remove {
                     width: 10ch;
+                    color: #b86a6a;
+                    border: 2px solid #dd9090;
                 }
             }
             
 
-            button:hover {
+            button.read:hover {
                 background-color: #f0f0f0;
+            }
+
+            button.remove:hover {
+                background-color: rgb(255, 238, 238);
             }
         }
     }
@@ -280,7 +293,7 @@ body > .container {
     fieldset {
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 16px;
         border: 2px solid rgb(194, 194, 194);
         border-radius: 16px;
         padding: 16px;
@@ -296,6 +309,7 @@ body > .container {
             border: 2px solid #c6c6c7;
             background-color: inherit;
             border-radius: 4px;
+            font-size: 1rem;
 
             &:focus {
                 outline: none;

@@ -85,17 +85,17 @@
                     <legend>New book</legend>
 
                     <label for="title">
-                        <div>Title <span aria-label="required">*</span></div>
-                        <input type="text" id="book-title" name="title" maxlength="35" required>
+                        <div class="label-text">Title <span aria-label="required">*</span></div>
+                        <input type="text" id="book-title" name="title" maxlength="40" required>
                     </label>
 
                     <label for="author">
-                        <div>Author <span aria-label="required">*</span></div>
-                        <input type="text" id="book-author" name="author" maxlength="35" required>
+                        <div class="label-text">Author <span aria-label="required">*</span></div>
+                        <input type="text" id="book-author" name="author" maxlength="40" required>
                     </label>
 
                     <label for="genre">
-                        <div>Genre</div>
+                        <div class="label-text">Genre</div>
                         <select name="genre" id="book-genre">
                             <option value="" selected>—— Select ——</option>
                             <option>Fiction</option>
@@ -110,25 +110,29 @@
                             <option>Biography</option>
                             <option>Adventure</option>
                             <option>Self-Help</option>
-                            <option>Personal Development</option>
                         </select>
                     </label>
 
                     <div id="pages-release-box">
                         <label for="pages">
-                            <div>Pages</div>
+                            <div class="label-text">Pages</div>
                             <input type="number" id="book-pages" name="pages" min="1" max="99999">
                         </label>
     
                         <label for="release">
-                            <div>Release year</div>
+                            <div class="label-text">Release year</div>
                             <input type="number" id="book-release" name="release" min="1" max="2025">
                         </label>
                     </div>
 
+                    <label for="book-cover">
+                        <div class="label-text">Book cover image</div>
+                        <input type="file" name="cover" value="cover" id="book-cover" accept="image/jpeg, image/png">
+                    </label>
+
                     <label class="checkbox" for="book-read">
                         <input type="checkbox" name="read" value="read" id="book-read">
-                        <span>Read</span>
+                        <span class="label-text">Already read</span>
                     </label>
                 </fieldset>
 
