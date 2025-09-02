@@ -165,7 +165,7 @@ body > .container {
     gap: 16px;
     padding: 12px 16px 12px 12px;
     border-radius: 16px;
-    border: 2px solid rgb(201, 201, 201);
+    border: 2px solid #c9c9c9;
     height: 180px;
     width: fit-content;
 
@@ -178,7 +178,9 @@ body > .container {
         min-height: 100%;
 
         img {
+            height: 150px;
             width: 100px;
+            border: 2px solid rgba(201, 201, 201, 0.5);
         }
     }
 

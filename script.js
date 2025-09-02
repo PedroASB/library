@@ -1,5 +1,5 @@
 // Book constructor
-function Book(title, author, pages, read, genre, release) {
+function Book(title, author, pages, read, genre, release, cover) {
     if (!new.target) {
         throw Error("Must use the 'new' operator to call the constructor");
     }
@@ -9,6 +9,7 @@ function Book(title, author, pages, read, genre, release) {
     this.read = read;
     this.genre = genre;
     this.release = release;
+    this.cover = cover; // Path to the cover image
     this.id = crypto.randomUUID();
 }
 
@@ -18,8 +19,8 @@ Book.prototype.toggleReadStatus = function() {
 }
 
 // Adds a new book to the library array
-function addBookToLibrary(title, author, pages, read, genre, release) {
-    const newBook = new Book(title, author, pages, read, genre, release);
+function addBookToLibrary(title, author, pages, read, genre, release, cover) {
+    const newBook = new Book(title, author, pages, read, genre, release, cover);
     library.push(newBook);
 }
 
@@ -81,6 +82,10 @@ function displayBook(book) {
     card.querySelector(".pages .value").textContent = book.pages;
     card.querySelector(".genre .value").textContent = book.genre;
     card.querySelector(".release .value").textContent = book.release;
+    if (book.cover) {
+        card.querySelector(".picture").style.backgroundColor = "inherit";
+        card.querySelector(".picture img").src = book.cover;
+    }
     
     removeButton.addEventListener("click", handleRemoveBook);
     readButton.addEventListener("click", handleReadBook);
@@ -104,10 +109,20 @@ function displayAllBooks() {
 
 // Adds some random books to the library
 function addSampleBooks() {
-    addBookToLibrary("Nice Book", "AuTornado", 123, false, "Sci-Fi", 1980);
-    addBookToLibrary("Another Nice Book", "AuThor", 456, false, "Wi-Fi", 1985);
-    addBookToLibrary("A Nicer Book", "AuThor Ragnarok", 1089, false, "Action", 1990);
-    addBookToLibrary("The Nicest One", "Alt Thor", 684, false, "Random", 1995);
+    addBookToLibrary("Dracula", "Bram Stoker", 461, false,
+                     "Horror", 1897, "./assets/imgs/dracula-cover.jpg");
+    addBookToLibrary("Moby Dick", "Herman Melville", 635, true,
+                     "Adventure", 1851, "./assets/imgs/moby-dick-cover.jpg");
+    addBookToLibrary("The Adventures of Sherlock Holmes", "Arthur Conan Doyle", 307, false,
+                     "Fiction", 1892, "./assets/imgs/sherlock-holmes-cover.jpg");
+    addBookToLibrary("Frankenstein; or, The Modern Prometheus", "Mary Shelley", 280, false,
+                     "Horror", 1818, "./assets/imgs/frankenstein-cover.jpg");
+    addBookToLibrary("Treasure Island", "Robert Louis Stevenson", 292, false,
+                     "Adventure", 1883, "./assets/imgs/treasure-island-cover.jpg");
+    addBookToLibrary("The Wonderful Wizard of Oz", "L. Frank Baum", 154, true,
+                     "Fantasy", 1900, "./assets/imgs/wizard-of-oz-cover.jpg");
+    addBookToLibrary("The Mysterious Island", "Jules Verne", 650, false,
+                     "Adventure", 1875, "./assets/imgs/the-mysterious-island-cover.jpg");
 }
 
 // Extracts the data from the form and adds the book to the library array
