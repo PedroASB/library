@@ -113,9 +113,9 @@ function addSampleBooks() {
                      "Horror", 1897, "./assets/imgs/dracula-cover.jpg");
     addBookToLibrary("Moby Dick", "Herman Melville", 635, true,
                      "Adventure", 1851, "./assets/imgs/moby-dick-cover.jpg");
-    addBookToLibrary("The Adventures of Sherlock Holmes", "Arthur Conan Doyle", 307, false,
+    addBookToLibrary("Sherlock Holmes", "Arthur Conan Doyle", 307, false,
                      "Fiction", 1892, "./assets/imgs/sherlock-holmes-cover.jpg");
-    addBookToLibrary("Frankenstein; or, The Modern Prometheus", "Mary Shelley", 280, false,
+    addBookToLibrary("Frankenstein", "Mary Shelley", 280, false,
                      "Horror", 1818, "./assets/imgs/frankenstein-cover.jpg");
     addBookToLibrary("Treasure Island", "Robert Louis Stevenson", 292, false,
                      "Adventure", 1883, "./assets/imgs/treasure-island-cover.jpg");
