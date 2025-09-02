@@ -11,14 +11,15 @@
                  "Noto Color Emoji";
     --primary-color: #6097df;
     --primary-color-hover: #7baceb;
+    --primary-color-lighter: #e9f5ff;
     --font-color: #181818;
-    --lighter-font-color: #464646;
+    --lighter-font-color: #383838;
     --main-bg-color: #fff;
-    --sidebar-bg-color: #f0f0f0;
 }
 
 body {
-    font-family: var(--system-ui);
+    font-family: "Roboto", var(--system-ui);
+    letter-spacing: 0.2px;
     color: var(--font-color);
     position: relative;
 }
@@ -85,7 +86,7 @@ body > .container {
         }
 
         .name {
-            background-color: rgb(233, 245, 255);
+            background-color: var(--primary-color-lighter);
             padding: 8px 16px 8px 64px;
             margin-left: -40px;
             border-radius: 0 32px 32px 0;
@@ -95,7 +96,7 @@ body > .container {
     #new-book-btn {
         justify-self: start;
         background-color: var(--primary-color);
-        padding: 8px 24px;
+        padding: 10px 32px;
         border-radius: 8px;
         border: none;
         color: #fff;
@@ -120,23 +121,41 @@ body > .container {
 
 #sidebar {
     grid-area: sidebar;
-    background-color: var(--sidebar-bg-color);
+    background-color: var(--primary-color-lighter);
     padding: 40px;
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 32px;    
 
     .branding {
-        font-weight: 900;
-        font-size: 1.25rem;
+        display: flex;
+        gap: 8px;
+        
+        img {
+            width: 50px;
+        }
+
+        .branding-name {
+            font-weight: 800;
+            font-size: 2rem;
+            color: #363636;
+        }
+        
     }
     
     .navigation {
         font-weight: 500;
+        color: var(--lighter-font-color);
         font-size: 1.1rem;
         display: flex;
         flex-direction: column;
         gap: 8px;
+
+        div {
+            display: flex;
+            gap: 12px;
+            cursor: pointer;
+        }
     }
 }
 
@@ -153,7 +172,7 @@ body > .container {
     .unread-books, .read-books {
         display: grid;
         gap: 24px 16px;
-        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
         grid-auto-rows: min-content;
         margin: 16px 0 48px 0;
     }
